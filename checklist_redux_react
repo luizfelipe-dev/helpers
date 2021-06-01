@@ -5,9 +5,8 @@
 - [ ] pensar quais actions serão necessárias na sua aplicação
 
 *Instalação*
-- [ ] npx create-react-app my-app-redux;
+- [ ] npx create-react-app my-app-redux; (já instala o npm)
 - [ ] npm install --save redux react-redux;
-- [ ] npm install.
 
 *Criar dentro do diretório src:*
 - [ ] diretório actions;
@@ -29,8 +28,19 @@
 *No arquivo store/index.js:*
 - [ ] importar o rootReducer e criar a store
 - [ ] configurar o [Redux DevTools](https://github.com/reduxjs/redux-devtools)
+  
+  npm install --save redux-devtools-extension
+  
+  import { createStore } from 'redux';
+  import { composeWithDevTools } from 'redux-devtools-extension';
 
-*Na pasta reducers:*
+  const store = createStore(
+    rootReducer, 
+    composeWithDevTools()
+  );
+
+ *Na pasta reducers:*
+  (cada 'gaveta' é um reducer - precisamos agrupar as informações que fazem sentido estarem juntas)
 - [ ] criar os reducers necessários
 - [ ] configurar os exports do arquivo index.js
 
