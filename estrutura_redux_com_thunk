@@ -1,0 +1,111 @@
+REDUX
+
+npm install react-redux
+npm install --save redux-devtools-extension
+
+-----------------------------------
+index.js geral:
+-----------------------------------
+
+import { Provider } from 'react-redux';
+import { BrowseRouter } from 'react-router-dom';
+import store from './store';
+
+ReactDOM.render(
+  <Provider store={ store } >
+    <BrowseRouter>
+      <App />
+    </BrowseRouter>
+  </Provider>,
+  document.getElementById('root')
+);
+-----------------------------------
+store:
+-----------------------------------
+
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import rootReducer from '../reducers';
+import thunk from 'redux-thunk';
+
+const store = createStore(
+  rootReducer, 
+  composeWithDevTools(
+    applyMiddleware(thunk),
+  ));
+
+export default store;
+
+-----------------------------------
+reducer:
+-----------------------------------	
+
+------ index.js:
+
+import { combineReducers } from 'redux';
+import user from './user';
+
+const rootReducer = combineReducers({
+  user,
+});
+
+export default rootReducer;
+
+------- reducer.js:
+
+const INITIAL_STATE = {
+  email: '',
+  password: '',
+};
+
+const user = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+  case 'TYPED_EMAIL':
+    return {
+      ...state,
+      email: action.payload.email,
+    };
+default: return state;
+  }
+};
+
+export default user;
+
+-----------------------------------
+actions e thunk:
+-----------------------------------	
+
+export const fetchApiExchangeSuccess = (payload) => ({
+  type: 'FETCH_API_EXCHANGE_SUCCESS',
+  payload: {
+    success: payload,
+  },
+});
+
+export const fetchApiExchangeError = (payload) => ({
+  type: 'FETCH_API_EXCHANGE_ERROR',
+  payload: {
+    error: payload,
+  },
+});
+
+export const fetchApiExchangeThunk = () => async (dispatch) => {
+  const API_URL = 'https://economia.awesomeapi.com.br/json/all';
+
+  const fetchApi = await fetch(API_URL);
+  const resolve = await fetchApi.json();
+  const data = await resolve;
+
+  try {
+    dispatch(fetchApiExchangeSuccess(data));
+  } catch (e) {
+    dispatch(fetchApiExchangeError(e));
+  }
+};
+
+export const addExpenseAction = (payload) => ({
+  type: 'ADD_EXPENSE',
+  payload: {
+    expenses: payload,
+  },
+});
