@@ -1,0 +1,5 @@
+Procurar processos abertos em node ou Jest
+ss | egrep 'node|jest
+
+Matar todos as portas:
+killall node
