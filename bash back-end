@@ -3,3 +3,14 @@ ss | egrep 'node|jest
 
 Matar todos as portas:
 killall node
+
+OU:
+
+Observar os processos:
+
+ps aux | grep node
+to get the process ids.
+
+Matar os processos:
+
+kill -9 PID
