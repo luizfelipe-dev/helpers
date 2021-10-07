@@ -1,0 +1,1 @@
+Repositório: https://github.com/tryber/Trybe-CheatSheets/tree/master/backend/sequelize/setup#instala%C3%A7%C3%A3o-do-sequelize
