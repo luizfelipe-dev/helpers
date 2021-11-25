@@ -1,0 +1,33 @@
+Instalando o MongoDB Community Edition
+Os próximos passos para instalação do MongoDB serão realizados com base na distribuição Ubuntu utilizando o apt package manager .
+
+1. Importando a chave pública utilizada pelo gerenciamento de pacotes
+Abra o terminal e utilize o comando abaixo para importar chave pública GPG do MongoDB .
+
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+
+Este comando deve retornar um OK .
+Porém, se você receber um erro indicando que gnupg não está instalado, faça como abaixo:
+Instalar o gnupg e as bibliotecas necessárias através do comando:
+
+sudo apt-get install gnupg
+Após a instalação, tente importar a chave outra vez:
+
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -
+
+2. Crie o arquivo de lista ( list file ) para o MongoDB
+Crie o arquivo /etc/apt/sources.list.d/mongodb-org-4.4.list para o Ubuntu 20.04 (Focal):
+Copiar
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+
+3. Atualize o banco de dados local de pacotes
+
+sudo apt-get update
+
+4. Instale os pacotes do MongoDB
+Você pode instalar a última versão estável do **MongoDB , ou uma versão específica.
+Para instalar a última versão estável, utilize o comando abaixo:
+
+sudo apt-get install -y mongodb-org
+
+Pronto! Agora você já tem a última versão estável do MongoDB instalada e pronta para ser executada na sua máquina. Mas antes, vamos dar uma olhada nos pacotes que foram instalados.
